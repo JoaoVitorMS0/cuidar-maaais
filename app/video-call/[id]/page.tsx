@@ -3,13 +3,9 @@
 import { useRouter, useParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft, PhoneOff, Mic, MicOff, Video, VideoOff } from "lucide-react"
-import { useState, useEffect, useRef, useCallback } from "react"
+import Image from "next/image"
+import { useState, useEffect, useRef } from "react"
 import BottomNavigation from "@/components/bottom-navigation"
-
-interface Consultation {
-  doctorId: string
-  status: string
-}
 
 export default function VideoCallPage() {
   const router = useRouter()
@@ -24,53 +20,26 @@ export default function VideoCallPage() {
   const [callConnected, setCallConnected] = useState(false)
 
   const doctors = {
-    "1": {
-      name: "Dr. Fernandes",
-      specialty: "Psicólogo Clínico",
-      gender: "male",
-      image: "/Dr_Fernandes.png",
-    },
-    "2": {
-      name: "Dra. Nathalia Silva",
-      specialty: "Psicóloga Clínica",
-      gender: "female",
-      image: "/Dr_Nathalia_Silva.png",
-    },
+    "1": { name: "Dr. Fernandes", specialty: "Psicólogo Clínico", gender: "male" },
+    "2": { name: "Dra. Nathalia Silva", specialty: "Psicóloga Clínica", gender: "female" },
   }
 
   const doctor = doctors[params.id as keyof typeof doctors] || doctors["1"]
   const isMaleDoctor = doctor.gender === "male"
-
   const doctorVideoSrc = isMaleDoctor ? "/video/Psicólogo_Clínico.mp4" : "/video/Psicóloga_Clínica.mp4"
-
-  const checkActiveConsultation = useCallback(() => {
-    const consultations = JSON.parse(localStorage.getItem("cuidar_consultations") || "[]") as Consultation[]
-
-    // Verificar se há alguma consulta agendada para este doutor
-    const activeConsultation = consultations.find(
-      (consultation: Consultation) => consultation.doctorId === params.id && consultation.status === "agendada",
-    )
-
-    console.log("Consultas encontradas:", consultations)
-    console.log("Consulta ativa:", activeConsultation)
-
-    setHasActiveConsultation(!!activeConsultation)
-  }, [params.id])
 
   useEffect(() => {
     checkActiveConsultation()
-  }, [checkActiveConsultation])
+  }, [])
 
   useEffect(() => {
     if (hasActiveConsultation && isVideoOn) {
       startVideo()
 
-      // Simular conexão após 2 segundos
       const connectionTimer = setTimeout(() => {
         setCallConnected(true)
       }, 2000)
 
-      // Esconder container de informações após 5 segundos
       const infoTimer = setTimeout(() => {
         setShowInfoContainer(false)
       }, 5000)
@@ -86,7 +55,15 @@ export default function VideoCallPage() {
         stream.getTracks().forEach((track) => track.stop())
       }
     }
-  }, [hasActiveConsultation, isVideoOn, stream])
+  }, [hasActiveConsultation, isVideoOn])
+
+  const checkActiveConsultation = () => {
+    const consultations = JSON.parse(localStorage.getItem("cuidar_consultations") || "[]")
+    const activeConsultation = consultations.find(
+      (consultation: any) => consultation.doctorId === params.id && consultation.status === "agendada",
+    )
+    setHasActiveConsultation(!!activeConsultation)
+  }
 
   const startVideo = async () => {
     try {
@@ -138,7 +115,18 @@ export default function VideoCallPage() {
           <Button variant="ghost" size="icon" onClick={() => router.back()} className="cursor-pointer">
             <ArrowLeft className="w-6 h-6" />
           </Button>
-          <span className="text-sm font-medium">Videochamada</span>
+          <div className="flex justify-center mb-6">
+            <div className="relative w-32 h-16">
+              <Image
+                src="/logo_cuidar_mais.png"
+                alt="Cuidar+ Logo"
+                width={128}
+                height={64}
+                className="object-contain"
+                priority
+              />
+            </div>
+          </div>
           <div className="w-10" />
         </div>
 
@@ -169,71 +157,28 @@ export default function VideoCallPage() {
         <span className="text-sm font-medium text-white">Videochamada - {doctor.name}</span>
         <div className="w-10" />
       </div>
-
       <div className="flex-1 relative">
-        {/* Quando o container de informações desaparece, trocamos as posições */}
-        {showInfoContainer ? (
-          <>
-            {/* Vídeo do usuário em tela cheia */}
-            <div className="absolute inset-0">
-              {isVideoOn ? (
-                <video ref={videoRef} autoPlay muted className="w-full h-full object-cover" />
-              ) : (
-                <div className="w-full h-full bg-gray-800 flex items-center justify-center">
-                  <div className="text-center text-white">
-                    <VideoOff className="w-16 h-16 mx-auto mb-4" />
-                    <p>Câmera desligada</p>
-                  </div>
-                </div>
-              )}
+        <div className="absolute inset-0 bg-gray-900">
+          {!showInfoContainer && (
+            <video
+              src={doctorVideoSrc}
+              autoPlay
+              loop
+              muted
+              className="w-full h-full object-cover"
+              onError={() => console.log("Erro ao carregar vídeo do médico")}
+            />
+          )}
+        </div>
+        <div className="absolute top-4 right-4 w-32 h-24 bg-gray-700 rounded-lg overflow-hidden border-2 border-white">
+          {isVideoOn ? (
+            <video ref={videoRef} autoPlay muted className="w-full h-full object-cover" />
+          ) : (
+            <div className="w-full h-full bg-gray-800 flex items-center justify-center">
+              <VideoOff className="w-6 h-6 text-white" />
             </div>
-
-            {/* Vídeo do doutor (simulado) em miniatura */}
-            <div className="absolute top-4 right-4 w-32 h-24 bg-gray-700 rounded-lg overflow-hidden border-2 border-white">
-              <video
-                ref={doctorVideoRef}
-                src={doctorVideoSrc}
-                autoPlay
-                loop
-                muted
-                className="w-full h-full object-cover"
-                onError={() => {
-                  // Fallback para imagem se o vídeo não carregar
-                  console.log("Erro ao carregar vídeo do médico")
-                }}
-              />
-            </div>
-          </>
-        ) : (
-          <>
-            {/* Vídeo do doutor em tela cheia */}
-            <div className="absolute inset-0">
-              <video
-                src={doctorVideoSrc}
-                autoPlay
-                loop
-                muted
-                className="w-full h-full object-cover"
-                onError={() => {
-                  console.log("Erro ao carregar vídeo do médico em tela cheia")
-                }}
-              />
-            </div>
-
-            {/* Vídeo do usuário em miniatura */}
-            <div className="absolute top-4 right-4 w-32 h-24 bg-gray-700 rounded-lg overflow-hidden border-2 border-white">
-              {isVideoOn ? (
-                <video ref={videoRef} autoPlay muted className="w-full h-full object-cover" />
-              ) : (
-                <div className="w-full h-full bg-gray-800 flex items-center justify-center">
-                  <VideoOff className="w-6 h-6 text-white" />
-                </div>
-              )}
-            </div>
-          </>
-        )}
-
-        {/* Informações da chamada - desaparece após alguns segundos */}
+          )}
+        </div>
         {showInfoContainer && (
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white">
             <div className="bg-black/30 backdrop-blur rounded-2xl p-6">
@@ -244,8 +189,6 @@ export default function VideoCallPage() {
           </div>
         )}
       </div>
-
-      {/* Controles da chamada */}
       <div className="bg-black/50 backdrop-blur p-6">
         <div className="flex justify-center space-x-8">
           <Button
@@ -271,8 +214,6 @@ export default function VideoCallPage() {
           </Button>
         </div>
       </div>
-
-      <BottomNavigation />
     </div>
   )
 }

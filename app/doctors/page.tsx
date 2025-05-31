@@ -134,7 +134,7 @@ export default function DoctorsPage() {
                     onClick={() => router.push(`/chat/${doctor.id}`)}
                     className={
                       consultationStatus[doctor.id]
-                        ? "border-green-500 text-green-600"
+                        ? "border-green-500 text-green-600 cursor-pointer"
                         : ""
                     }
                   >
@@ -146,7 +146,7 @@ export default function DoctorsPage() {
                     onClick={() => handlePhoneClick(doctor.id)}
                     className={
                       consultationStatus[doctor.id]
-                        ? "border-green-500 text-green-600"
+                        ? "border-green-500 text-green-600 cursor-pointer"
                         : ""
                     }
                   >
@@ -158,7 +158,7 @@ export default function DoctorsPage() {
                     onClick={() => handleVideoClick(doctor.id)}
                     className={
                       consultationStatus[doctor.id]
-                        ? "border-green-500 text-green-600"
+                        ? "border-green-500 text-green-600 cursor-pointer"
                         : ""
                     }
                   >
@@ -175,7 +175,7 @@ export default function DoctorsPage() {
                   onClick={() =>
                     router.push(`/consultation-booking/${doctor.id}`)
                   }
-                  className="w-full bg-green-600 text-white hover:bg-green-700 rounded-full py-3"
+                  className="w-full bg-green-600 text-white hover:bg-green-700 rounded-full py-3 cursor-pointer"
                 >
                   Obter consulta
                 </Button>
