@@ -1,4 +1,4 @@
-# Cuidar+ (cuidar-maaais)
+# Cuidar+
 
 Cuidar+ é uma plataforma digital de saúde focada em bem-estar, consultas médicas e acompanhamento personalizado, desenvolvida com [Next.js](https://nextjs.org) e recursos modernos do ecossistema React. O projeto oferece funcionalidades para o usuário cuidar da saúde física e mental, com planos acessíveis e recursos de emergência.
 
