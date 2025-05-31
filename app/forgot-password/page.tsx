@@ -7,6 +7,10 @@ import { Input } from "@/components/ui/input"
 import { ArrowLeft } from "lucide-react"
 import Image from "next/image"
 
+interface User {
+  email: string
+}
+
 export default function ForgotPasswordPage() {
   const router = useRouter()
   const [email, setEmail] = useState("")
@@ -18,8 +22,8 @@ export default function ForgotPasswordPage() {
       return
     }
 
-    const users = JSON.parse(localStorage.getItem("cuidar_users") || "[]")
-    const user = users.find((u: any) => u.email === email)
+    const users = JSON.parse(localStorage.getItem("cuidar_users") || "[]") as User[]
+    const user = users.find((u: User) => u.email === email)
 
     if (user) {
       setMessage("Instruções de recuperação enviadas para seu email!")
@@ -34,13 +38,7 @@ export default function ForgotPasswordPage() {
         <Button variant="ghost" size="icon" onClick={() => router.back()} className="cursor-pointer">
           <ArrowLeft className="w-6 h-6" />
         </Button>
-        <div className="w-10" />
-      </div>
-
-      <div className="flex-1 flex flex-col items-center justify-center p-6">
-        <div className="w-full max-w-sm space-y-8">
-          <div className="text-center space-y-4">
-            <div className="flex justify-center mb-20">
+        <div className="flex justify-center">
               <div className="relative w-32 h-16">
                 <Image
                   src="/logo_cuidar_mais.png"
@@ -52,6 +50,12 @@ export default function ForgotPasswordPage() {
                 />
               </div>
             </div>
+        <div className="w-10" />
+      </div>
+
+      <div className="flex-1 flex flex-col items-center justify-center p-6">
+        <div className="w-full max-w-sm space-y-8">
+          <div className="text-center space-y-4">
             <div>
               <h1 className="text-2xl font-bold text-black">Recuperar Senha</h1>
               <p className="text-sm text-gray-600 mt-2">Digite seu email para recuperar a senha</p>
@@ -75,7 +79,7 @@ export default function ForgotPasswordPage() {
 
             <Button
               onClick={handleResetPassword}
-              className="w-full bg-black text-white hover:bg-gray-800 rounded-full py-6 text-lg font-medium"
+              className="w-full bg-black text-white hover:bg-gray-800 rounded-full py-6 text-lg font-medium cursor-pointer" 
             >
               Enviar
             </Button>

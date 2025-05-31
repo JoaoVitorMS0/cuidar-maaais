@@ -1,23 +1,23 @@
-"use client";
+"use client"
 
-import { useRouter, useParams } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { ArrowLeft, Calendar } from "lucide-react";
-import { useState } from "react";
-import BottomNavigation from "@/components/bottom-navigation";
-import Image from "next/image";
+import { useRouter, useParams } from "next/navigation"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { ArrowLeft, Calendar } from "lucide-react"
+import { useState } from "react"
+import BottomNavigation from "@/components/bottom-navigation"
+import Image from "next/image"
 
 export default function ConsultationBookingPage() {
-  const router = useRouter();
-  const params = useParams();
-  const [selectedDate, setSelectedDate] = useState("");
-  const [selectedTime, setSelectedTime] = useState("");
-  const [patientName, setPatientName] = useState("");
-  const [patientAge, setPatientAge] = useState("");
-  const [symptoms, setSymptoms] = useState("");
-  const [phone, setPhone] = useState("");
+  const router = useRouter()
+  const params = useParams()
+  const [selectedDate, setSelectedDate] = useState("")
+  const [selectedTime, setSelectedTime] = useState("")
+  const [patientName, setPatientName] = useState("")
+  const [patientAge, setPatientAge] = useState("")
+  const [symptoms, setSymptoms] = useState("")
+  const [phone, setPhone] = useState("")
 
   const doctors = {
     "1": {
@@ -30,9 +30,9 @@ export default function ConsultationBookingPage() {
       specialty: "Psicóloga Clínica",
       image: "/Dr_Nathalia_Silva.png",
     },
-  };
+  }
 
-  const doctor = doctors[params.id as keyof typeof doctors] || doctors["1"];
+  const doctor = doctors[params.id as keyof typeof doctors] || doctors["1"]
 
   const availableTimes = [
     "08:00",
@@ -52,30 +52,24 @@ export default function ConsultationBookingPage() {
     "22:00",
     "23:00",
     "00:00",
-  ];
+  ]
 
   const getMinDate = () => {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, "0");
-    const day = String(today.getDate()).padStart(2, "0");
-    return `${year}-${month}-${day}`;
-  };
+    const today = new Date()
+    const year = today.getFullYear()
+    const month = String(today.getMonth() + 1).padStart(2, "0")
+    const day = String(today.getDate()).padStart(2, "0")
+    return `${year}-${month}-${day}`
+  }
 
-  const getAvailableTimesForDate = (selectedDate: string) => {
-    return availableTimes;
-  };
+  const getAvailableTimesForDate = () => {
+    return availableTimes
+  }
 
   const handleBooking = () => {
-    if (
-      !patientName ||
-      !patientAge ||
-      !selectedDate ||
-      !selectedTime ||
-      !phone
-    ) {
-      alert("Por favor, preencha todos os campos obrigatórios");
-      return;
+    if (!patientName || !patientAge || !selectedDate || !selectedTime || !phone) {
+      alert("Por favor, preencha todos os campos obrigatórios")
+      return
     }
 
     const consultation = {
@@ -89,30 +83,20 @@ export default function ConsultationBookingPage() {
       date: selectedDate,
       time: selectedTime,
       status: "agendada",
-    };
+    }
 
-    const existingConsultations = JSON.parse(
-      localStorage.getItem("cuidar_consultations") || "[]"
-    );
-    existingConsultations.push(consultation);
-    localStorage.setItem(
-      "cuidar_consultations",
-      JSON.stringify(existingConsultations)
-    );
+    const existingConsultations = JSON.parse(localStorage.getItem("cuidar_consultations") || "[]")
+    existingConsultations.push(consultation)
+    localStorage.setItem("cuidar_consultations", JSON.stringify(existingConsultations))
 
-    alert("Consulta agendada com sucesso!");
-    router.push("/doctors");
-  };
+    alert("Consulta agendada com sucesso!")
+    router.push("/doctors")
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <div className="bg-white flex items-center justify-between p-4 shadow-sm">
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => router.back()}
-          className="cursor-pointer"
-        >
+        <Button variant="ghost" size="icon" onClick={() => router.back()} className="cursor-pointer">
           <ArrowLeft className="w-6 h-6" />
         </Button>
         <div className="text-center mb-6">
@@ -133,15 +117,12 @@ export default function ConsultationBookingPage() {
       </div>
 
       <div className="flex-1 p-6">
+        
+
         <div className="bg-white rounded-2xl p-6 shadow-sm border mb-6">
           <div className="text-center mb-6">
             <div className="relative w-20 h-20 rounded-full overflow-hidden border-4 border-blue-500 mx-auto mb-4">
-              <Image
-                src={doctor.image || "/placeholder.svg"}
-                alt={doctor.name}
-                fill
-                className="object-cover"
-              />
+              <Image src={doctor.image || "/placeholder.svg"} alt={doctor.name} fill className="object-cover" />
             </div>
             <h3 className="font-bold text-lg">{doctor.name}</h3>
             <p className="text-sm text-gray-600">{doctor.specialty}</p>
@@ -149,9 +130,7 @@ export default function ConsultationBookingPage() {
 
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Nome Completo *
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Nome Completo *</label>
               <Input
                 value={patientName}
                 onChange={(e) => setPatientName(e.target.value)}
@@ -162,9 +141,7 @@ export default function ConsultationBookingPage() {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Idade *
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Idade *</label>
                 <Input
                   type="number"
                   value={patientAge}
@@ -174,9 +151,7 @@ export default function ConsultationBookingPage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Telefone *
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Telefone *</label>
                 <Input
                   type="tel"
                   value={phone}
@@ -188,9 +163,7 @@ export default function ConsultationBookingPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Data da Consulta *
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Data da Consulta *</label>
               <div className="relative">
                 <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <Input
@@ -204,16 +177,14 @@ export default function ConsultationBookingPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Horário Disponível *
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Horário Disponível *</label>
               <div className="grid grid-cols-3 gap-2">
-                {getAvailableTimesForDate(selectedDate).map((time) => (
+                {getAvailableTimesForDate().map((time) => (
                   <Button
                     key={time}
                     variant={selectedTime === time ? "default" : "outline"}
                     onClick={() => setSelectedTime(time)}
-                    className="text-sm"
+                    className="text-sm cursor-pointer hover:bg-gray-100 border-gray-300 hover:text-blue-500 rounded-full py-2 px-4"
                   >
                     {time}
                   </Button>
@@ -222,9 +193,7 @@ export default function ConsultationBookingPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Sintomas/Motivo da Consulta
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Sintomas/Motivo da Consulta</label>
               <Textarea
                 value={symptoms}
                 onChange={(e) => setSymptoms(e.target.value)}
@@ -235,7 +204,7 @@ export default function ConsultationBookingPage() {
 
             <Button
               onClick={handleBooking}
-              className="w-full bg-blue-600 text-white hover:bg-blue-700 rounded-full py-3 font-medium"
+              className="w-full bg-blue-600 text-white hover:bg-blue-700 rounded-full py-3 font-medium cursor-pointer"
             >
               Confirmar Agendamento
             </Button>
@@ -245,5 +214,5 @@ export default function ConsultationBookingPage() {
 
       <BottomNavigation />
     </div>
-  );
+  )
 }

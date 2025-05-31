@@ -8,6 +8,11 @@ import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 
+interface User {
+  email: string
+  password: string
+}
+
 export default function LoginPage() {
   const router = useRouter()
   const [email, setEmail] = useState("")
@@ -20,8 +25,8 @@ export default function LoginPage() {
       return
     }
 
-    const users = JSON.parse(localStorage.getItem("cuidar_users") || "[]")
-    const user = users.find((u: any) => u.email === email && u.password === password)
+    const users = JSON.parse(localStorage.getItem("cuidar_users") || "[]") as User[]
+    const user = users.find((u: User) => u.email === email && u.password === password)
 
     if (user) {
       localStorage.setItem("cuidar_user", JSON.stringify(user))
@@ -34,16 +39,11 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-white flex flex-col">
       <div className="flex items-center justify-between p-4">
-        <Button variant="ghost" size="icon" onClick={() => router.back()} className="cursor-pointer">
+        <Button variant="ghost" size="icon" onClick={() => router.back()}>
           <ArrowLeft className="w-6 h-6" />
         </Button>
-        <div className="w-10" />
-      </div>
-
-      <div className="flex-1 flex flex-col items-center justify-center p-6">
-        <div className="w-full max-w-sm space-y-8">
-          <div className="text-center space-y-4">
-            <div className="flex justify-center mb-23">
+        <div className="text-center space-y-4">
+            <div className="flex justify-center">
               <div className="relative w-32 h-16">
                 <Image
                   src="/logo_cuidar_mais.png"
@@ -56,7 +56,11 @@ export default function LoginPage() {
               </div>
             </div>
           </div>
+        <div className="w-10" />
+      </div>
 
+      <div className="flex-1 flex flex-col items-center justify-center p-6">
+        <div className="w-full max-w-sm space-y-8">
           <div className="space-y-4">
             <Input
               type="email"
@@ -78,13 +82,13 @@ export default function LoginPage() {
 
             <Button
               onClick={handleLogin}
-              className="w-full bg-black text-white hover:bg-gray-800 rounded-full py-6 text-lg font-medium"
+              className="w-full bg-black text-white hover:bg-gray-800 rounded-full py-6 text-lg font-medium cursor-pointer"
             >
               ENTRAR
             </Button>
 
             <div className="text-center">
-              <Link href="/forgot-password" className="text-sm text-gray-600 underline">
+              <Link href="/forgot-password" className="text-sm text-gray-600 underline cursor-pointer">
                 Esqueceu a senha?
               </Link>
             </div>
