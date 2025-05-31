@@ -4,7 +4,8 @@ Cuidar+ é uma plataforma digital de saúde focada em bem-estar, consultas médi
 
 ## ✨ Funcionalidades
 
-- **Planos de Saúde**: 
+- **Planos de Saúde**:
+
   - **Básico (Gratuito):** Conteúdos de bem-estar, meditação, exercícios e chamadas rápidas de emergência.
   - **Intermediário:** Tudo do básico + consultas ilimitadas com psicólogos e agenda médica integrada.
   - **Premium:** Tudo do intermediário + acompanhamento personalizado e relatórios semanais para familiares.
@@ -78,6 +79,6 @@ Pull requests são bem-vindos! Para contribuir:
 
 ---
 
-Desenvolvido por [JoaoVitorMS0](https://github.com/JoaoVitorMS0) 💙
-Protótipo de alta fidelidade feito por Eyck Cainã Silva Santos, 
+Desenvolvido por [JoaoVitorMS0](https://github.com/JoaoVitorMS0) 💙  
+Protótipo de alta fidelidade feito por Eyck Cainã Silva Santos,
 João Pedro de Oliveira Guimarães, João Afonso Lopes de Carvalho
