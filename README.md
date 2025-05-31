@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cuidar+ (cuidar-maaais)
 
-## Getting Started
+Cuidar+ é uma plataforma digital de saúde focada em bem-estar, consultas médicas e acompanhamento personalizado, desenvolvida com [Next.js](https://nextjs.org) e recursos modernos do ecossistema React. O projeto oferece funcionalidades para o usuário cuidar da saúde física e mental, com planos acessíveis e recursos de emergência.
 
-First, run the development server:
+## ✨ Funcionalidades
+
+- **Planos de Saúde**: 
+  - **Básico (Gratuito):** Conteúdos de bem-estar, meditação, exercícios e chamadas rápidas de emergência.
+  - **Intermediário:** Tudo do básico + consultas ilimitadas com psicólogos e agenda médica integrada.
+  - **Premium:** Tudo do intermediário + acompanhamento personalizado e relatórios semanais para familiares.
+
+- **Consultas Online**: Agendamento de consultas com profissionais, incluindo videochamadas seguras.
+- **Chat com Especialistas**: Tire dúvidas com profissionais de saúde.
+- **Lembretes de Medicamentos**: Gerencie receitas e receba alertas de horários para tomar remédios.
+- **Acompanhamento de Saúde**: Ferramentas para monitoramento de atividades físicas, bem-estar mental, notificações e privacidade.
+- **Ambiente Responsivo**: Interface adaptável para dispositivos móveis e desktop.
+
+## 🚀 Como começar
+
+Clone o projeto e instale as dependências:
+
+```bash
+git clone https://github.com/JoaoVitorMS0/cuidar-maaais.git
+cd cuidar-maaais
+npm install
+```
+
+Para iniciar o servidor de desenvolvimento:
 
 ```bash
 npm run dev
-# or
+# ou
 yarn dev
-# or
+# ou
 pnpm dev
-# or
+# ou
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abra [http://localhost:3000](http://localhost:3000) no navegador para ver o resultado.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🗂 Estrutura do Projeto
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `app/` — Contém as páginas principais do sistema:
+  - `home/` — Página inicial e navegação entre funcionalidades.
+  - `plans/` — Exibição de planos disponíveis.
+  - `consultation-booking/` — Agendamento de consultas.
+  - `video-call/` — Realização de videochamadas médicas.
+  - `medicine-home/` — Gerenciamento e lembretes de medicamentos.
+  - `chat/` — Conversa direta com profissionais.
+  - `settings/` — Configurações de perfil, privacidade e notificações.
+- `public/` — Imagens e assets estáticos.
+- `app/layout.tsx` — Layout global, fontes e estilos.
+- `app/page.tsx` — Página principal (landing page).
 
-## Learn More
+## ⚙️ Tecnologias Utilizadas
 
-To learn more about Next.js, take a look at the following resources:
+- [Next.js](https://nextjs.org/) (App Router)
+- React
+- TypeScript
+- [next/font](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) e [Geist Font](https://vercel.com/font)
+- CSS Modules (ou Tailwind CSS se estiver configurado)
+- LocalStorage para armazenamento temporário de dados do usuário
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📦 Deploy
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Recomendado o deploy na [Vercel](https://vercel.com) para melhor performance e integração contínua. Basta conectar o repositório no painel da Vercel e seguir as instruções.
 
-## Deploy on Vercel
+## 🤝 Contribua
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Pull requests são bem-vindos! Para contribuir:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Faça um fork do projeto
+2. Crie uma branch (`git checkout -b feature/sua-feature`)
+3. Commit suas modificações (`git commit -m 'feat: nova feature'`)
+4. Faça push na sua branch (`git push origin feature/sua-feature`)
+5. Abra um Pull Request
+
+---
+
+Desenvolvido por [JoaoVitorMS0](https://github.com/JoaoVitorMS0) 💙
+Protótipo de alta fidelidade feito por Eyck Cainã Silva Santos, 
+João Pedro de Oliveira Guimarães, João Afonso Lopes de Carvalho
