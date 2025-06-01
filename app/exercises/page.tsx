@@ -52,7 +52,10 @@ export default function ExercisesPage() {
         </div>
 
         <div className="space-y-6">
-          <div className="relative h-48 rounded-2xl overflow-hidden">
+          <div
+            onClick={() => router.push("/video-class")}
+            className="relative h-48 rounded-2xl overflow-hidden cursor-pointer"
+          >
             <Image
               src="/Assistir_exercicio.png"
               alt="Elderly people exercising"
@@ -70,7 +73,7 @@ export default function ExercisesPage() {
           </div>
 
           <div
-            onClick={() => router.push("/video-class")}
+            onClick={() => router.push("/doctors")}
             className="relative h-48 rounded-2xl overflow-hidden cursor-pointer"
           >
             <Image

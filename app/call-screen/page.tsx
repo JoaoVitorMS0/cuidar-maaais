@@ -20,16 +20,11 @@ export default function CallScreenPage() {
         >
           <ArrowLeft className="w-6 h-6" />
         </Button>
-        <span className="text-sm font-medium">Tela chamada</span>
-        <div className="w-10" />
-      </div>
-
-      <div className="flex-1 p-6">
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
             <div className="relative w-32 h-16">
               <Image
-                src="/placeholder.svg?height=64&width=128"
+                src="/logo_cuidar_mais.png"
                 alt="Cuidar+ Logo"
                 width={128}
                 height={64}
@@ -39,17 +34,23 @@ export default function CallScreenPage() {
             </div>
           </div>
         </div>
+        <div className="w-10" />
+      </div>
 
+      <div className="flex-1 p-6">
         <div className="space-y-6">
           <div className="relative h-48 rounded-2xl overflow-hidden">
             <Image
-              src="/placeholder.svg?height=300&width=400"
+              src="/Psicoterapia.png"
               alt="Therapy session"
               fill
               className="object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-            <div className="absolute bottom-4 left-4 right-4">
+            <div
+              onClick={() => router.push("/psychotherapy-benefits")}
+              className="absolute bottom-4 left-4 right-4 cursor-pointer"
+            >
               <div className="bg-blue-600 text-white px-4 py-2 rounded-full text-center">
                 <span className="text-sm font-medium">
                   CONHEÇA OS BENEFÍCIOS DA PSICOTERAPIA
