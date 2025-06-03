@@ -20,7 +20,7 @@ export default function DoctorsPage() {
       specialty: "Psicólogo Clínico",
       image: "/Dr_Fernandes.png",
       description:
-        "O Cuidar+ conecta você a médicos e especialistas de forma rápida e segura. Agende consultas online com profissionais qualificados para cuidar da sua saúde física e mental. Estamos aqui para cuidar de você!",
+        "Dr. Fernandes é um Psicólogo Clínico dedicado a promover o bem-estar mental. Com uma abordagem acolhedora e eficaz, ele oferece suporte especializado para que você possa desenvolver ferramentas e estratégias para uma vida mais plena e saudável. Conecte-se a um atendimento humanizado e construa um caminho para o autoconhecimento e o equilíbrio emocional.",
     },
     {
       id: 2,
@@ -28,7 +28,7 @@ export default function DoctorsPage() {
       specialty: "Psicóloga Clínica",
       image: "/Dr_Nathalia_Silva.png",
       description:
-        "Especialista em terapia cognitivo-comportamental com mais de 10 anos de experiência.",
+        "A Dra. Nathalia Silva é uma Psicóloga Clínica renomada, com vasta experiência em Terapia Cognitivo-Comportamental (TCC). Há mais de 10 anos, ela tem ajudado pacientes a transformar padrões de pensamento e comportamento, promovendo mudanças duradouras para uma vida mais equilibrada e satisfatória. Sua abordagem prática e focada em resultados oferece o caminho para você alcançar seus objetivos de saúde mental.",
     },
   ];
 
